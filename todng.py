@@ -16,14 +16,22 @@ import subprocess
 import os
 import logging
 import threading
+from sys import platform
 from tqdm import tqdm
 from const import RAWEXT, MAX_CONCURRENT_RENDER_THREAD
 
-adobeDNGPathCMD = "\"C:\\Program Files\\Adobe\\Adobe DNG Converter\\Adobe DNG Converter.exe\" -c %s"
+if platform == "linux" or platform == "linux2":
+    raise NotImplementedError("dng converter is not available in Linux")
+elif platform == "darwin":
+    adobeDNGPathCMD = "/Applications/Adobe\ DNG\ Converter.app/Contents/MacOS/Adobe\ DNG\ Converter -c %s"
+elif platform == "win32":
+    adobeDNGPathCMD = "\"C:\\Program Files\\Adobe\\Adobe DNG Converter\\Adobe DNG Converter.exe\" -c %s"
+
 logger = logging.getLogger(__name__)
 
 def render_single(s, file):
-    logger.debug(adobeDNGPathCMD % file)
+    # logger.debug(adobeDNGPathCMD % file)
+    tqdm.write(adobeDNGPathCMD % file)
     subprocess.call(adobeDNGPathCMD % file, shell=True)
     s.release()
 

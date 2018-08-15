@@ -35,6 +35,10 @@ RAW file copy utility.
 """
 
 def copy_pairs_raw_only(s, d, o):
+
+    if not os.path.exists(d):
+        os.mkdir(d)
+
     for dir, _, files in os.walk(s):
         logger.info("Copying RAW files, %d to copy." % (len(files) - o))
         # for f in tqdm(files):
