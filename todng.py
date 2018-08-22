@@ -23,9 +23,9 @@ from const import RAWEXT, MAX_CONCURRENT_RENDER_THREAD
 if platform == "linux" or platform == "linux2":
     raise NotImplementedError("dng converter is not available in Linux")
 elif platform == "darwin":
-    adobeDNGPathCMD = "/Applications/Adobe\ DNG\ Converter.app/Contents/MacOS/Adobe\ DNG\ Converter -c %s"
+    adobeDNGPathCMD = "/Applications/Adobe\ DNG\ Converter.app/Contents/MacOS/Adobe\ DNG\ Converter -c -e %s"
 elif platform == "win32":
-    adobeDNGPathCMD = "\"C:\\Program Files\\Adobe\\Adobe DNG Converter\\Adobe DNG Converter.exe\" -c %s"
+    adobeDNGPathCMD = "\"C:\\Program Files\\Adobe\\Adobe DNG Converter\\Adobe DNG Converter.exe\" -c -e %s"
 
 logger = logging.getLogger(__name__)
 
